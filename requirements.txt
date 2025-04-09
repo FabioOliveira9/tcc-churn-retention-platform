@@ -1,0 +1,11 @@
+streamlit
+fastapi
+uvicorn
+pydantic
+scikit-learn
+lightgbm
+imblearn
+pandas
+numpy
+joblib
+shap
