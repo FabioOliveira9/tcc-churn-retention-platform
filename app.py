@@ -1,40 +1,29 @@
-# app.py
+
 import streamlit as st
-from PIL import Image
-from churn_predicao_id import run as run_predicao_id
+from app_home import show_home
+from app_dashboard import show_dashboard
+from app_predicao_por_id import show_predicao_por_id
+from app_predicao_manual import show_predicao_manual
 
-# Título e imagem lateral
-st.set_page_config(page_title="Plataforma de Retenção", layout="wide")
+st.set_page_config(page_title="Plataforma de Retenção", page_icon="📊", layout="wide")
 
-with st.sidebar:
-    st.image("foto_fabio.jpeg", width=200)
-    st.markdown("#### Fabio do Nascimento Oliveira")
-    st.markdown("Engenharia Eletrônica e de Computação - UFRJ")
-    st.markdown("**Trabalho de Conclusão de Curso**")
-    st.markdown("**Plataforma para Predição e Prevenção de Churn utilizando Machine Learning, WebAPIs e Estratégias de Growth**")
-    st.markdown("Orientador: Heraldo Luis Silveira Almeida")
-    pagina = st.selectbox("🔎 Navegue pelas seções:", ["Página Inicial", "Predição por CustomerID"])
+# Sidebar
+st.sidebar.image("foto_fabio.jpeg", width=160)
+st.sidebar.markdown("<h3 style='text-align: center; margin-top: 10px;'>Fabio do Nascimento Oliveira</h3>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align: center;'>Engenharia Eletrônica e de Computação</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<p style='text-align: center;'>Escola Politécnica - UFRJ</p>", unsafe_allow_html=True)
+st.sidebar.markdown("<hr>", unsafe_allow_html=True)
 
-# Página Central
-if pagina == "Página Inicial":
-    st.markdown("## 📊 Plataforma de Retenção de Clientes")
-    st.write("""
-    Esta plataforma foi desenvolvida como parte do Trabalho de Conclusão de Curso de Engenharia Eletrônica e de Computação na UFRJ. 
-    Seu objetivo é prever a probabilidade de churn (cancelamento) de clientes e propor estratégias de retenção baseadas em dados reais e explicabilidade.
-    
-    ### Funcionalidades:
-    - Predição individual por CustomerID
-    - Estratégias de retenção personalizadas
-    - Visualização da importância dos fatores (SHAP)
-    """)
-    
-    st.markdown("### ⚙️ Modelagem Utilizada")
-    st.write("""
-    - Algoritmo base: **XGBoost**
-    - Técnica de balanceamento: **SMOTE**
-    - Seleção de variáveis: **RFE com 15 features**
-    - Otimização de hiperparâmetros: **Optuna (F1-score)**
-    """)
+pagina = st.sidebar.selectbox(
+    "Escolha uma página:",
+    ["🏠 Página Inicial", "🔎 Predição por ID", "📝 Previsão Manual", "📊 Dashboard"]
+)
 
-elif pagina == "Predição por CustomerID":
-    run_predicao_id()
+if pagina == "🏠 Página Inicial":
+    show_home()
+elif pagina == "🔎 Predição por ID":
+    show_predicao_por_id()
+elif pagina == "📝 Previsão Manual":
+    show_predicao_manual()
+elif pagina == "📊 Dashboard":
+    show_dashboard()
