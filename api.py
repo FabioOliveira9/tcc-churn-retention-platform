@@ -49,4 +49,4 @@ def predict_churn_por_id(customer_id: str):
     proba = modelo.predict_proba(entrada)[:, 1][0]
     acoes = definir_acao_recomendacao(entrada, proba)
     dados_cliente = cliente.drop(columns=["churn_value"]).iloc[0].to_dict()
-    return {"churn_proba": float(proba), "acoes": acoes, "dados_cliente": dados_cliente}
+    return {"churn_proba": float(proba), "acoes": acoes, "dados_cliente": dados}
